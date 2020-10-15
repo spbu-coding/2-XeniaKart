@@ -47,8 +47,9 @@ int main(int argc, char** argv)
 	for (int k = 0; k < 100; k++)
 	{
 		long long input_value;
+		char c;
 
-		if (scanf("%lld", &input_value) == 0)
+		if (scanf("%lld%c", &input_value, &c) != 2)
 		{
 			break;
 		}
@@ -68,7 +69,6 @@ int main(int argc, char** argv)
 			input_count++;
 		}
 
-		char c = getchar();
 		if (c != ' ')
 		{
 			break;
