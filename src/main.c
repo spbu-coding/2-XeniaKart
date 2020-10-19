@@ -3,15 +3,25 @@
 #include <stdlib.h>
 #include "sort.h"
 
+#define FROM_STRING_LENGTH 7
+#define TO_STRING_LENGTH 5
+
+#define LESS_THAN_ONE_PARAMS -1
+#define MORE_THAN_TWO_PARAMS -2
+#define REPEAT_PARAM -3
+#define INCORRECT_PARAMS -4
+
+#define INPUT_LIMIT 100
+
 int main(int argc, char** argv)
 {
 	if (argc < 2)
 	{
-		return -1;
+		return LESS_THAN_ONE_PARAMS;
 	}
 	else if (argc > 3)
 	{
-		return -2;
+		return MORE_THAN_TWO_PARAMS;
 	}
 
 	long long from_value = 0, to_value = 0;
@@ -19,32 +29,32 @@ int main(int argc, char** argv)
 
 	for (int i = 1; i < argc; i++)
 	{
-		if (strncmp(argv[i], "--from=", 7) == 0)
+		if (strncmp(argv[i], "--from=", FROM_STRING_LENGTH) == 0)
 		{
-			from_value = strtoll(argv[i] + 7, NULL, 10);
+			from_value = strtoll(argv[i] + FROM_STRING_LENGTH, NULL, 10);
 			from_count += 1;
 		}
-		else if (strncmp(argv[i], "--to=", 5) == 0)
+		else if (strncmp(argv[i], "--to=", TO_STRING_LENGTH) == 0)
 		{
-			to_value = strtoll(argv[i] + 5, NULL, 10);
+			to_value = strtoll(argv[i] + TO_STRING_LENGTH, NULL, 10);
 			to_count += 1;
 		}
 	}
 
 	if (from_count > 1 || to_count > 1)
 	{
-		return -3;
+		return REPEAT_PARAM;
 	}
-	else if (from_count == 0 && to_count == 0 && argc == 3)
+	else if (from_count == 0 && to_count == 0) 
 	{
-		return -4;
+		return INCORRECT_PARAMS;
 	}
 
-	long long input[100];
-	long long input_copy[100];
+	long long input[INPUT_LIMIT];
+	long long input_copy[INPUT_LIMIT];
 	int input_count = 0;
 
-	for (int k = 0; k < 100; k++)
+	for (int k = 0; k < INPUT_LIMIT; k++)
 	{
 		long long input_value;
 		char c;
