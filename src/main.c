@@ -64,15 +64,18 @@ int main(int argc, char** argv)
 			break;
 		}
 
+	
 		if (from_count == 1 && input_value <= from_value)
 		{
 			fprintf(stdout, "%lld ", input_value);
+			fflush(stdout);
 		}
-		else if (to_count == 1 && input_value >= to_value)
+		if (to_count == 1 && input_value >= to_value)
 		{
 			fprintf(stderr, "%lld ", input_value);
+			fflush(stderr);
 		}
-		else
+		if ((input_value > from_value || from_count != 1) && (input_value < to_value || to_count != 1))
 		{
 			input[input_count] = input_value;
 			input_copy[input_count] = input_value;
@@ -95,8 +98,6 @@ int main(int argc, char** argv)
 			change_count++;
 		}
 	}
-
-	printf("\n");
 
 	return change_count;
 }
